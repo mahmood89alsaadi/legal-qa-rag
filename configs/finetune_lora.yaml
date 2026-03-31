@@ -1,0 +1,25 @@
+# LoRA / QLoRA Fine-tuning Configuration
+
+base_model: "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+output_dir: "results/finetuned"
+
+# Training
+epochs: 3
+batch_size: 4
+grad_accum: 4
+learning_rate: 2e-4
+max_seq_length: 2048
+
+# LoRA
+lora:
+  rank: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - v_proj
+    - k_proj
+    - o_proj
+
+# Data
+train_data: "data/processed/train_with_reasoning.json"

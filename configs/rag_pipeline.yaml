@@ -1,0 +1,28 @@
+# RAG Pipeline Configuration
+
+model:
+  name: "phi4-mini"           # phi4-mini | gemma-3-4b | nemotron-mini
+  backend: "ollama"           # ollama | hf
+  max_tokens: 512
+  temperature: 0.0            # Deterministic for reproducibility
+
+retrieval:
+  type: "hybrid"              # bm25 | dense | hybrid
+  top_k: 5
+  bm25_weight: 0.4
+  dense_weight: 0.6
+  dense_model: "BAAI/bge-m3"
+
+prompt:
+  style: "baseline"           # baseline | adversarial | auditor
+
+mcq:
+  size: 20                    # 4 or 20
+
+data:
+  corpus_path: "data/processed/corpus.json"
+  test_path: "data/processed/mcq20_test.json"
+
+output:
+  predictions_path: "results/predictions_mcq20.json"
+  report_path: "results/report_mcq20.json"
